@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   creator: "Intellibus",
   publisher: "Intellibus",
   generator: "Next.js",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://attendance.intellibus.academy'),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any", type: "image/x-icon" },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "AI Academy",
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://attendance.intellibus.academy',
     images: [
       {
         url: "/intellibus-logo.png",
