@@ -525,10 +525,18 @@ function AttendeeView() {
                 </div>
               </div>
 
-              <div className="pt-2 border-t">
-                <p className="text-sm text-muted-foreground">
+              <div className="pt-4 border-t space-y-3">
+                <p className="text-sm text-muted-foreground text-center">
                   Scan the QR code displayed by your instructor to check in
                 </p>
+                <Button 
+                  onClick={() => router.push('/scan')}
+                  className="w-full"
+                  size="lg"
+                >
+                  <QrCode className="mr-2 h-5 w-5" />
+                  Open Camera to Scan
+                </Button>
               </div>
             </div>
           )}
