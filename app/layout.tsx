@@ -100,9 +100,9 @@ export default function RootLayout({
                 <main className="flex-1 bg-transparent">
                   {children}
                 </main>
-                <Footer />
-                <ToasterProvider />
               </AssistantWrapper>
+              <Footer />
+              <ToasterProvider />
             </div>
           </div>
         </ThemeProvider>

@@ -26,7 +26,9 @@ export function AssistantWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      {children}
+      <div className="flex-1 flex flex-col">
+        {children}
+      </div>
       {isAdmin && <AssistantModal />}
     </AssistantRuntimeProvider>
   )
