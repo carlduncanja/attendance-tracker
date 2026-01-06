@@ -189,7 +189,8 @@ export const useStore = create<StoreState>((set, get) => {
       set({ auth: { isLoading: true, isAuthenticated: false } })
 
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
+        // Use the current origin for the callback - this ensures we redirect back to the same domain
+        const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://attendance.intellibus.academy'
         // Use auth callback route with next parameter for final destination
         const callbackUrl = `${baseUrl}/auth/callback?next=${encodeURIComponent(redirectTo || '/')}`
         
@@ -197,6 +198,7 @@ export const useStore = create<StoreState>((set, get) => {
           provider: 'google',
           options: {
             redirectTo: callbackUrl,
+            skipBrowserRedirect: false,
           }
         })
       } catch (error) {
