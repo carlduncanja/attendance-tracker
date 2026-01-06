@@ -390,9 +390,10 @@ function AttendeeView() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative">
-      {/* Top Bar - only for admins simulating attendee view */}
-      {isActualAdmin && (
-        <div className="absolute top-2 left-2 right-2 md:top-4 md:left-4 md:right-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+      {/* Top Bar */}
+      <div className="absolute top-2 left-2 right-2 md:top-4 md:left-4 md:right-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+        {/* Role Simulator - only for admins */}
+        {isActualAdmin ? (
           <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm px-2 py-1.5 md:px-3 md:py-2 rounded-lg border">
             <Eye className="h-4 w-4 text-muted-foreground hidden sm:block" />
             <Label className="text-xs md:text-sm font-medium">View as:</Label>
@@ -415,12 +416,32 @@ function AttendeeView() {
               </SelectContent>
             </Select>
           </div>
-          <Button variant="outline" size="sm" className="gap-1 md:gap-2 px-2 md:px-3 text-xs md:text-sm" onClick={handleSignOut}>
-            <LogOut className="h-3 w-3 md:h-4 md:w-4" />
-            <span className="hidden sm:inline">Sign Out</span>
-          </Button>
-        </div>
-      )}
+        ) : (
+          <div />
+        )}
+        
+        {/* Sign Out Button with Confirmation */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="outline" size="sm" className="gap-1 md:gap-2 px-2 md:px-3 text-xs md:text-sm">
+              <LogOut className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Sign Out</span>
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Sign Out</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to sign out?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleSignOut}>Sign Out</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
 
       <Card className="w-full max-w-md text-center">
         <CardHeader>
