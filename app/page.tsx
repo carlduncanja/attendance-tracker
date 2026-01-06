@@ -251,7 +251,7 @@ function AdminView() {
       </div>
 
       {/* QR Code */}
-      <div className="bg-white p-8 rounded-2xl shadow-2xl">
+      <div className="bg-white p-8 rounded-2xl">
         {qrValue ? (
           <QRCodeSVG value={qrValue} size={320} level="H" includeMargin={false} />
         ) : (
