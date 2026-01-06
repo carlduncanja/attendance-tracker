@@ -320,12 +320,14 @@ function AttendeeView() {
     checkTodayStatus()
   }, [loadCheckins])
 
-  // Determine if checked in today from checkins
+  // Determine if checked in today from checkins (filter by current user)
   useEffect(() => {
-    if (checkins && checkins.length > 0) {
+    if (checkins && checkins.length > 0 && user) {
       const today = new Date()
       today.setHours(0, 0, 0, 0)
       const todayCheckin = checkins.find((c: any) => {
+        // Make sure it's the current user's check-in
+        if (c.user_id !== user.id) return false
         const checkinDate = new Date(c.checked_in_at)
         checkinDate.setHours(0, 0, 0, 0)
         return checkinDate.getTime() === today.getTime()
@@ -334,7 +336,7 @@ function AttendeeView() {
     } else {
       setHasCheckedInToday(false)
     }
-  }, [checkins])
+  }, [checkins, user])
 
   // Auto-save name with debounce
   useEffect(() => {
