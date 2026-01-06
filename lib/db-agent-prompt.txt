@@ -51,6 +51,18 @@ You have access to a PostgreSQL database with the following structure:
    
    Indexes: user_id, session_id, timestamp
 
+5. **attendance_name_change_logs** - Tracks when users change their display name
+   Columns:
+   - id (UUID, PRIMARY KEY)
+   - user_id (UUID, NOT NULL) - References auth.users(id)
+   - previous_name (TEXT) - The name before the change (NULL for first-time setup)
+   - new_name (TEXT, NOT NULL) - The new name they changed to
+   - ip_address (INET) - IP address when change was made
+   - user_agent (TEXT) - Browser/device info
+   - changed_at (TIMESTAMP) - When the change occurred
+   
+   Indexes: user_id, changed_at
+
 ## YOUR CAPABILITIES
 
 You have access to 8 powerful tools for database operations:
@@ -128,6 +140,11 @@ User: "Who checked in today?"
 - Active sessions
 - Expired sessions
 - Session history
+
+### Name Change History
+- View all name changes for a user
+- Recent name changes across all users
+- Users who have changed their name multiple times
 
 ## TIPS FOR ACCURACY
 
