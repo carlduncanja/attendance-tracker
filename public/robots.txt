@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-academy-attendance.vercel.app/sitemap.xml
+
