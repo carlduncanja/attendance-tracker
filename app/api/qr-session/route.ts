@@ -41,12 +41,8 @@ export const POST = requireAuth(['admin'])(async (req: AuthenticatedRequest) => 
       return NextResponse.json({ error: 'Failed to create session' }, { status: 500 })
     }
 
-    // Clean up old expired sessions (optional, runs in background)
-    supabaseAdmin
-      .from('attendance_sessions')
-      .delete()
-      .lt('expires_at', new Date().toISOString())
-      .then(() => {})
+    // NOTE: Do NOT delete old sessions here - it cascades and deletes check-ins!
+    // Sessions are kept for historical reference of check-ins
 
     return NextResponse.json({ session })
   } catch (error) {
