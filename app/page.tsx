@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { QRCodeSVG } from "qrcode.react"
 import { useStore } from "@/src/store"
 import Image from "next/image"
-import { LogOut, UserCheck, Eye, CheckCircle, QrCode, Loader2, User, Copy, Check } from "lucide-react"
+import { LogOut, UserCheck, Eye, CheckCircle, QrCode, Loader2, User, Copy, Check, Camera } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -529,14 +529,35 @@ function AttendeeView() {
                 <p className="text-sm text-muted-foreground text-center">
                   Scan the QR code displayed by your instructor to check in
                 </p>
-                <Button 
-                  onClick={() => router.push('/scan')}
-                  className="w-full"
-                  size="lg"
-                >
-                  <QrCode className="mr-2 h-5 w-5" />
-                  Open Camera to Scan
-                </Button>
+                <div className="flex flex-col gap-2">
+                  <Button 
+                    onClick={() => router.push('/scan')}
+                    className="w-full"
+                    size="lg"
+                  >
+                    <QrCode className="mr-2 h-5 w-5" />
+                    Open QR Scanner
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    onClick={() => {
+                      // Open device camera app
+                      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        // For iOS/Android, try to trigger the native camera
+                        const input = document.createElement('input')
+                        input.type = 'file'
+                        input.accept = 'image/*'
+                        input.capture = 'environment'
+                        input.click()
+                      }
+                    }}
+                    className="w-full"
+                    size="lg"
+                  >
+                    <Camera className="mr-2 h-5 w-5" />
+                    Open Device Camera
+                  </Button>
+                </div>
               </div>
             </div>
           )}

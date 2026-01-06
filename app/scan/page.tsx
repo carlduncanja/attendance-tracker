@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { useStore } from "@/src/store"
 import { ArrowLeft, Camera, CheckCircle, XCircle, AlertCircle, Loader2 } from "lucide-react"
 import { Scanner } from "@yudiel/react-qr-scanner"
-import Image from "next/image"
 
 export default function ScanPage() {
   const router = useRouter()
@@ -122,17 +121,6 @@ export default function ScanPage() {
 
         <Card>
           <CardHeader className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Image
-                src="/intellibus-logo.png"
-                alt="Intellibus Logo"
-                width={40}
-                height={40}
-                className="filter brightness-0 dark:brightness-0 dark:invert"
-              />
-              <span className="font-semibold text-lg">AI Academy</span>
-            </div>
-            
             {status === 'scanning' && (
               <>
                 <CardTitle className="flex items-center justify-center gap-2">
