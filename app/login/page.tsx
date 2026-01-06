@@ -30,7 +30,14 @@ function LoginPageContent() {
 
   useEffect(() => {
     if (auth.isAuthenticated && user) {
-      router.push(redirectTo)
+      // Check for stored redirect from OAuth flow
+      const storedRedirect = typeof window !== 'undefined' ? sessionStorage.getItem('auth_redirect') : null
+      if (storedRedirect) {
+        sessionStorage.removeItem('auth_redirect')
+        router.push(storedRedirect)
+      } else {
+        router.push(redirectTo)
+      }
     }
   }, [auth.isAuthenticated, user, router, redirectTo])
 

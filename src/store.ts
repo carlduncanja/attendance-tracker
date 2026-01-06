@@ -189,16 +189,15 @@ export const useStore = create<StoreState>((set, get) => {
       set({ auth: { isLoading: true, isAuthenticated: false } })
 
       try {
-        // Use the current origin for the callback - this ensures we redirect back to the same domain
-        const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://attendance.intellibus.academy'
-        // Use auth callback route with next parameter for final destination
-        const callbackUrl = `${baseUrl}/auth/callback?next=${encodeURIComponent(redirectTo || '/')}`
+        // Store the intended redirect destination for after auth completes
+        if (redirectTo && typeof window !== 'undefined') {
+          sessionStorage.setItem('auth_redirect', redirectTo)
+        }
         
         await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
-            redirectTo: callbackUrl,
-            skipBrowserRedirect: false,
+            redirectTo: 'https://attendance.intellibus.academy',
           }
         })
       } catch (error) {

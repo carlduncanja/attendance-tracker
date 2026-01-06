@@ -539,6 +539,17 @@ export default function HomePage() {
     }
   }, [auth.isAuthenticated, initializeAuth])
 
+  // Handle post-OAuth redirect
+  useEffect(() => {
+    if (auth.isAuthenticated && typeof window !== 'undefined') {
+      const storedRedirect = sessionStorage.getItem('auth_redirect')
+      if (storedRedirect) {
+        sessionStorage.removeItem('auth_redirect')
+        router.replace(storedRedirect)
+      }
+    }
+  }, [auth.isAuthenticated, router])
+
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!auth.isLoading && !auth.isAuthenticated) {
