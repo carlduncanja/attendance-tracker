@@ -493,38 +493,40 @@ function AttendeeView() {
         </CardHeader>
         
         <CardContent>
-          {hasCheckedInToday ? (
-            <p className="text-sm text-muted-foreground">
-              You can close this page now
-            </p>
-          ) : (
-            <div className="space-y-4">
-              {/* Full Name Input - Auto-saves */}
-              <div className="space-y-2 text-left">
-                <Label htmlFor="fullName" className="flex items-center gap-2">
-                  <User className="h-4 w-4" />
-                  Full Name {needsFullName && <span className="text-red-500">*</span>}
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="fullName"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    className="pr-10"
-                  />
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    {isSavingName && (
-                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                    )}
-                    {nameSaved && !isSavingName && (
-                      <CheckCircle className="h-4 w-4 text-green-500" />
-                    )}
-                  </div>
+          <div className="space-y-4">
+            {hasCheckedInToday && (
+              <p className="text-sm text-muted-foreground text-center">
+                You can close this page now
+              </p>
+            )}
+            
+            {/* Full Name Input - Auto-saves - Always visible */}
+            <div className="space-y-2 text-left">
+              <Label htmlFor="fullName" className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                Full Name {needsFullName && <span className="text-red-500">*</span>}
+              </Label>
+              <div className="relative">
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="pr-10"
+                />
+                <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                  {isSavingName && (
+                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                  )}
+                  {nameSaved && !isSavingName && (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  )}
                 </div>
               </div>
+            </div>
 
+            {!hasCheckedInToday && (
               <div className="pt-4 border-t space-y-3">
                 <p className="text-sm text-muted-foreground text-center">
                   Scan the QR code displayed by your instructor to check in
@@ -541,15 +543,11 @@ function AttendeeView() {
                   <Button 
                     variant="outline"
                     onClick={() => {
-                      // Open device camera app
-                      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                        // For iOS/Android, try to trigger the native camera
-                        const input = document.createElement('input')
-                        input.type = 'file'
-                        input.accept = 'image/*'
-                        input.capture = 'environment'
-                        input.click()
-                      }
+                      const input = document.createElement('input')
+                      input.type = 'file'
+                      input.accept = 'image/*'
+                      input.capture = 'environment'
+                      input.click()
                     }}
                     className="w-full"
                     size="lg"
@@ -559,8 +557,8 @@ function AttendeeView() {
                   </Button>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </CardContent>
       </Card>
     </div>
