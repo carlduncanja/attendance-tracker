@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ToasterProvider } from "@/components/common/ToasterProvider"
 import { AssistantWrapper } from "@/components/AssistantWrapper"
 import { GridBackground } from "@/components/common/GridBackground"
+import Footer from "@/components/common/Footer"
 
 export const metadata: Metadata = {
   title: "AI Academy - Attendance Tracker",
@@ -99,6 +100,7 @@ export default function RootLayout({
                 <main className="flex-1 bg-transparent">
                   {children}
                 </main>
+                <Footer />
                 <ToasterProvider />
               </AssistantWrapper>
             </div>
