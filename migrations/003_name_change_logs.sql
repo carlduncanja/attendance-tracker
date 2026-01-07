@@ -40,3 +40,4 @@ CREATE POLICY "Service role can insert name change logs" ON attendance_name_chan
 -- Grant permissions
 GRANT ALL ON attendance_name_change_logs TO authenticated;
 
+

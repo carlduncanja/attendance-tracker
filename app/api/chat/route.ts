@@ -30,7 +30,7 @@ export const POST = requireAuth(['admin'])(async (req: AuthenticatedRequest) => 
     const { messages } = await req.json();
     
     const result = await streamText({
-      model: groq('llama-3.3-70b-versatile'),
+      model: groq('openai/gpt-oss-120b'),
       system: SYSTEM_PROMPT,
       messages: convertToModelMessages(messages),
       stopWhen: stepCountIs(50),

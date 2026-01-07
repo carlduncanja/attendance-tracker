@@ -40,3 +40,4 @@ export interface AttendanceStats {
   unique_checkins_today: number
 }
 
+
