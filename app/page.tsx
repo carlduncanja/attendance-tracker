@@ -54,7 +54,7 @@ function AdminView() {
       try {
         const session = await generateQRSession()
         if (session) {
-          const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
+          const baseUrl = 'https://attendance.intellibus.academy'
           setQrValue(`${baseUrl}/checkin?token=${session.token}`)
           setCurrentToken(session.token)
           setCountdown(30)
