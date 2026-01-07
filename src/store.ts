@@ -197,7 +197,7 @@ export const useStore = create<StoreState>((set, get) => {
         await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
-            redirectTo: 'https://attendance.intellibus.academy/login',
+            redirectTo: 'https://attendance.intellibus.academy',
           }
         })
       } catch (error) {
