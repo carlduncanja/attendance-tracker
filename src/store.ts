@@ -194,13 +194,10 @@ export const useStore = create<StoreState>((set, get) => {
           sessionStorage.setItem('auth_redirect', redirectTo)
         }
         
-        // Use the auth callback route to properly handle the OAuth response
-        const callbackUrl = `https://attendance.intellibus.academy/auth/callback${redirectTo ? `?next=${encodeURIComponent(redirectTo)}` : ''}`
-        
         await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
-            redirectTo: callbackUrl,
+            redirectTo: 'https://attendance.intellibus.academy/login',
           }
         })
       } catch (error) {
