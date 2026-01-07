@@ -238,7 +238,7 @@ function CheckinContent() {
             <>
               <AlertCircle className="h-16 w-16 text-yellow-600" />
               <p className="text-sm text-muted-foreground text-center">
-                The QR code changes every 30 seconds for security. 
+                The QR code changes every 3 minutes for security. 
                 Please scan the new QR code shown on the display.
               </p>
             </>

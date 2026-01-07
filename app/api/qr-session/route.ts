@@ -21,9 +21,9 @@ export const POST = requireAuth(['admin'])(async (req: AuthenticatedRequest) => 
     const userId = req.userId!
     const supabaseAdmin = getSupabaseAdmin()
 
-    // Generate a new token that expires in 35 seconds (5 second buffer)
+    // Generate a new token that expires in 185 seconds (3 minutes + 5 second buffer)
     const token = generateToken()
-    const expiresAt = new Date(Date.now() + 35 * 1000).toISOString()
+    const expiresAt = new Date(Date.now() + 185 * 1000).toISOString()
 
     // Insert the new session
     const { data: session, error } = await supabaseAdmin

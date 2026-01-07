@@ -31,7 +31,7 @@ export default function QRDisplayPage() {
   const router = useRouter()
   const { auth, attendanceUser, initializeAuth, generateQRSession, signOut, validateAndCheckin, simulatedRole, setSimulatedRole, getEffectiveRole } = useStore()
   const [qrValue, setQrValue] = useState<string>("")
-  const [countdown, setCountdown] = useState(30)
+  const [countdown, setCountdown] = useState(180)
   const [currentToken, setCurrentToken] = useState<string>("")
   const [isTestingCheckin, setIsTestingCheckin] = useState(false)
   const [testCheckinResult, setTestCheckinResult] = useState<{ success: boolean; message: string } | null>(null)
@@ -75,7 +75,7 @@ export default function QRDisplayPage() {
           const baseUrl = 'https://attendance.intellibus.academy'
           setQrValue(`${baseUrl}/checkin?token=${session.token}`)
           setCurrentToken(session.token)
-          setCountdown(30)
+          setCountdown(180)
         }
       } catch (error) {
         console.error('Error generating QR:', error)
@@ -87,10 +87,10 @@ export default function QRDisplayPage() {
     // Generate initial QR
     generateNewQR()
     
-    // Set up 30-second interval
+    // Set up 3-minute interval
     const interval = setInterval(() => {
       generateNewQR()
-    }, 30000)
+    }, 180000)
 
     return () => {
       clearInterval(interval)
@@ -276,7 +276,7 @@ export default function QRDisplayPage() {
       <div className="w-80 mt-4 h-1 bg-muted rounded-full overflow-hidden">
         <div 
           className="h-full bg-primary transition-all duration-1000 ease-linear"
-          style={{ width: `${(countdown / 30) * 100}%` }}
+          style={{ width: `${(countdown / 180) * 100}%` }}
         />
       </div>
     </div>

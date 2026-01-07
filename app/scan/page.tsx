@@ -201,7 +201,7 @@ export default function ScanPage() {
               <>
                 <AlertCircle className="h-16 w-16 text-yellow-600" />
                 <p className="text-sm text-muted-foreground text-center">
-                  The QR code changes every 30 seconds. Please scan the new QR code.
+                  The QR code changes every 3 minutes. Please scan the new QR code.
                 </p>
               </>
             )}

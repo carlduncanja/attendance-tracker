@@ -34,7 +34,7 @@ function AdminView() {
   const { generateQRSession, signOut, validateAndCheckin, simulatedRole, setSimulatedRole, attendanceUser } = useStore()
   const router = useRouter()
   const [qrValue, setQrValue] = useState<string>("")
-  const [countdown, setCountdown] = useState(30)
+  const [countdown, setCountdown] = useState(180)
   const [currentToken, setCurrentToken] = useState<string>("")
   const [isTestingCheckin, setIsTestingCheckin] = useState(false)
   const [testCheckinResult, setTestCheckinResult] = useState<{ success: boolean; message: string } | null>(null)
@@ -57,7 +57,7 @@ function AdminView() {
           const baseUrl = 'https://attendance.intellibus.academy'
           setQrValue(`${baseUrl}/checkin?token=${session.token}`)
           setCurrentToken(session.token)
-          setCountdown(30)
+          setCountdown(180)
         }
       } catch (error) {
         console.error('Error generating QR:', error)
@@ -70,7 +70,7 @@ function AdminView() {
     
     const interval = setInterval(() => {
       generateNewQR()
-    }, 30000)
+    }, 180000)
 
     return () => {
       clearInterval(interval)
@@ -82,7 +82,7 @@ function AdminView() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown(prev => {
-        if (prev <= 1) return 30
+        if (prev <= 1) return 180
         return prev - 1
       })
     }, 1000)
@@ -276,7 +276,7 @@ function AdminView() {
       <div className="w-80 mt-4 h-1 bg-muted rounded-full overflow-hidden">
         <div 
           className="h-full bg-primary transition-all duration-1000 ease-linear"
-          style={{ width: `${(countdown / 30) * 100}%` }}
+          style={{ width: `${(countdown / 180) * 100}%` }}
         />
       </div>
     </div>
